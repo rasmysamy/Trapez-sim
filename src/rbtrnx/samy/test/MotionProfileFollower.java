@@ -3,7 +3,7 @@ import java.lang.*;
 
 public class MotionProfileFollower{
     MotionProfile profile;
-    double maxAccel;
+    double maxSpeed;
     public static double EPSILON_VALUE = 0.0001;
 
     public boolean isWithinEpsilon(double o){
@@ -12,8 +12,8 @@ public class MotionProfileFollower{
         else
             return true;
     }
-    public MotionProfileFollower(double motorMaxAccel){
-        maxAccel = motorMaxAccel;
+    public MotionProfileFollower(double motorMaxSpeed){
+        maxSpeed = motorMaxSpeed;
     }
     public void setProfile(MotionProfile currentProfile){
         profile = currentProfile;
@@ -27,7 +27,7 @@ public class MotionProfileFollower{
     }
     public double getMotorOutput(double time){
         DriveState currentState = profile.driveStateAtTime(time);
-        return currentState.accel / maxAccel;
+        return currentState.speed / maxSpeed;
     }
     public boolean isFinishedTime(double time){
         MotionSegment lastSegment = profile.segments.get(profile.segments.size() - 1);
